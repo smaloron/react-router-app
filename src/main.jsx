@@ -3,6 +3,8 @@ import ReactDOM from 'react-dom/client'
 import App from './App'
 import './index.css'
 import { RouterProvider, createBrowserRouter } from 'react-router-dom';
+import TaskList from './pages/TaskList';
+import TaskDetails from './pages/TaskDetails';
 
 
 // Définition des routes
