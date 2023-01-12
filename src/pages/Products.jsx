@@ -6,7 +6,6 @@ export default function Products () {
 
     return (
         <div>
-            <Navbar />
             <h1>Produits {id} </h1>
         </div>
     );
