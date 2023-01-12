@@ -1,8 +1,13 @@
 import useAxios from 'axios-hooks';
+import { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import conf from '../config';
 export default function TaskList () {
-    const [{ data, loading, error }] = useAxios(conf.url);
+    const [{ data, loading, error }, reload] = useAxios(conf.url);
+
+    useEffect(() => {
+        reload();
+    }, []);
 
     if (loading) return <p>Chargement en cours</p>
 

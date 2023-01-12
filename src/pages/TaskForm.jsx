@@ -1,12 +1,18 @@
 import { Formik, useFormik } from 'formik'
+import useAxios from 'axios-hooks';
+import conf from '../config';
+import { useNavigate } from 'react-router-dom';
+import { redirect } from 'react-router';
 
 export default function TaskForm () {
 
+    const navigate = useNavigate();
+
+    const [{ data, loading, error }, addTask] = useAxios(
+        { url: conf.url, method: 'POST' }, { manual: true });
+
     const validate = (values) => {
         const errors = {};
-
-
-
         if (!values.taskName) {
             errors.taskName = 'Le nom de la tâche est obligatoire';
         }
@@ -14,9 +20,6 @@ export default function TaskForm () {
         if (!values.dueDate) {
             errors.dueDate = 'Une tâche doit avoir une date butoir'
         }
-
-        console.log(values, errors, values.dueDate === '')
-
         return errors;
     }
 
@@ -29,8 +32,8 @@ export default function TaskForm () {
         },
         validate,
         onSubmit: (values) => {
-            console.log(formik);
-            console.log(values);
+            addTask({ data: values });
+            navigate("/");
         }
     });
 
@@ -42,9 +45,11 @@ export default function TaskForm () {
         }
     }
 
+
     return (
         <div>
             <h1>Nouvelle tâche</h1>
+            {error ? <p>Impossible de créer la tâche</p> : ''}
             <form onSubmit={formik.handleSubmit}>
                 <div>
                     <label>Tâche</label>
