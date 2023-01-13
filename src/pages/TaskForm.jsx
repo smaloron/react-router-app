@@ -45,8 +45,7 @@ export default function TaskForm () {
         },
         validate,
         onSubmit: (values) => {
-            saveTask({ data: values });
-            navigate("/");
+            saveTask({ data: values }).then(() => navigate("/"));
         }
     });
 
