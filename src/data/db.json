@@ -2,14 +2,14 @@
   "tasks": [
     {
       "id": 1,
-      "taskName": "Comprendre la vie",
+      "taskName": "Comprendre la vie, enfin",
       "dueDate": "2090-01-01",
       "done": false,
       "description": "bla bla"
     },
     {
       "id": 2,
-      "taskName": "Me faire un café",
+      "taskName": "Me faire un bon café",
       "dueDate": "2023-01-01",
       "done": true,
       "description": "bla bla"
@@ -78,10 +78,6 @@
       "id": 11
     },
     {
-      "taskName": "ccccc §§§§",
-      "dueDate": "2023-01-07",
-      "description": "test",
-      "done": false,
       "id": 12
     },
     {
@@ -99,7 +95,7 @@
       "id": 14
     },
     {
-      "taskName": "Une tâche pour la route",
+      "taskName": "Une super tâche",
       "dueDate": "2023-01-14",
       "description": "test",
       "done": false,

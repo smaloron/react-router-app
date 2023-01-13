@@ -12,7 +12,8 @@ import TaskForm from './pages/TaskForm';
 const router = createBrowserRouter([
   { path: '/', element: <TaskList /> },
   { path: '/details/:id', element: <TaskDetails /> },
-  { path: '/new', element: <TaskForm /> }
+  { path: '/new', element: <TaskForm /> },
+  { path: '/update/:id', element: <TaskForm /> }
 ])
 
 ReactDOM.createRoot(document.getElementById('root')).render(

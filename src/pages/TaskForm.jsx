@@ -1,15 +1,28 @@
 import { Formik, useFormik } from 'formik'
 import useAxios from 'axios-hooks';
 import conf from '../config';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
+import { useEffect } from 'react';
 
 
 export default function TaskForm () {
 
+    const { id } = useParams();
     const navigate = useNavigate();
+    const URL = conf.url + (id ? id : '');
 
-    const [{ data, loading, error }, addTask] = useAxios(
-        { url: conf.url, method: 'POST' }, { manual: true });
+    const [{ data, loading, error }, saveTask] = useAxios(
+        { url: URL, method: id ? 'PUT' : 'POST' }, { manual: true });
+
+    const [{ data: task, loading: taskLoading, error: taskError }, getTask] = useAxios(
+        { url: URL, method: 'GET' }, { manual: true }
+    );
+
+    useEffect(() => {
+        if (id) {
+            getTask().then(response => formik.setValues(response.data));
+        }
+    }, []);
 
     const validate = (values) => {
         const errors = {};
@@ -32,7 +45,7 @@ export default function TaskForm () {
         },
         validate,
         onSubmit: (values) => {
-            addTask({ data: values });
+            saveTask({ data: values });
             navigate("/");
         }
     });
@@ -48,8 +61,9 @@ export default function TaskForm () {
 
     return (
         <div>
-            <h1>Nouvelle tâche</h1>
+            <h1>{id ? 'Modifier' : 'Ajouter'} une tâche</h1>
             {error ? <p>Impossible de créer la tâche</p> : ''}
+            {taskError ? <p>Impossible de récupérer les données de la tâche</p> : ''}
             <form onSubmit={formik.handleSubmit}>
                 <div>
                     <label>Tâche</label>

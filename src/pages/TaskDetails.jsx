@@ -15,6 +15,8 @@ export default function TaskDetails () {
             <Link to="/">Retour</Link>
             <h3 style={{ background: data.done ? 'green' : 'red' }}>{data.taskName}</h3>
             <p>{data.description}</p>
+
+            <Link to={'/update/' + data.id}>Modifier</Link>
         </div>
     )
 }
